@@ -1,14 +1,15 @@
-// server.js الرئيسي
+// server.js (الموجود في المجلد الجذر)
 const express = require('express');
 const app = express();
-const path = require('path');
 
-// تقديم ملفات الواجهة من المجلد الموحد
-app.use(express.static(path.join(__dirname, 'relaxfix-2026/dist')));
+// استيراد الخدمات من المجلد الفرعي
+const apiRoutes = require('./relaxfix-app/index.js');
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'relaxfix-2026/dist/index.html'));
+app.use(express.json());
+
+// ربط الواجهة بالخدمات
+app.use('/api', apiRoutes);
+
+app.listen(3000, () => {
+    console.log("المنظومة الحية تعمل بنجاح في المجلد الجذر...");
 });
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`RelaxFix 2026 is running on port ${PORT}`));
