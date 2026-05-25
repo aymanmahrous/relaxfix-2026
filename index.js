@@ -1,18 +1,11 @@
-async function sendOrder() {
-    const body = {
-        name: document.getElementById("name").value,
-        phone: document.getElementById("phone").value,
-        service: document.getElementById("service").value,
-        details: document.getElementById("details").value
-    };
+// 1. تعريف المتغير الأول وإعطائه قيمة
+const num1 = 5; 
 
-    const res = await fetch("/api/order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-    });
+// 2. تعريف المتغير الثاني وإعطائه قيمة
+const num2 = 10;
 
-    const data = await res.json();
-    document.getElementById("msg").innerText = data.success ? "تم إرسال الطلب" : "حدث خطأ";
-}
+// 3. حساب مجموع المتغير الأول والمتغير الثاني
+const sum = num1 + num2;
 
+// 4. طباعة النتيجة في وحدة التحكم (Console)
+console.log("مجموع الرقمين هو:", sum);
