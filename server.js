@@ -1,15 +1,19 @@
-// server.js (الموجود في المجلد الجذر)
-const express = require('express');
-const app = express();
+// server.js
+import express from 'express';
+import apiRoutes from './relaxfix-app/index.js';
 
-// استيراد الخدمات من المجلد الفرعي
-const apiRoutes = require('./relaxfix-app/index.js');
+const app = express();
 
 app.use(express.json());
 
-// ربط الواجهة بالخدمات
+// صفحة رئيسية
+app.get('/', (req, res) => {
+  res.json({ message: 'RelaxFix API تعمل بنجاح ✅' });
+});
+
+// ربط الـ API
 app.use('/api', apiRoutes);
 
 app.listen(3000, () => {
-    console.log("المنظومة الحية تعمل بنجاح في المجلد الجذر...");
+  console.log('السيرفر يعمل على البورت 3000');
 });
