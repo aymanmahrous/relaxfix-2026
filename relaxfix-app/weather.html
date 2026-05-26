@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الطقس - RelaxFix PRO OS</title>
+    <link rel="stylesheet" href="weather.css">
+</head>
+<body>
+    <div class="weather-container">
+        <div class="header">
+            <h1>🌤️ لوحة الطقس</h1>
+            <p>معلومات الطقس الفورية والتنبؤات</p>
+        </div>
+
+        <div class="search-section">
+            <input 
+                type="text" 
+                id="cityInput" 
+                placeholder="ابحث عن مدينة..."
+                autocomplete="off"
+            >
+            <button onclick="searchWeather()">بحث</button>
+        </div>
+
+        <div id="loading" class="loading hidden">جاري التحميل...</div>
+        <div id="error" class="error-message hidden"></div>
+
+        <div id="weatherContent" class="weather-content hidden">
+            <!-- Current Weather -->
+            <div class="current-weather">
+                <div class="city-info">
+                    <h2 id="cityName">اختر مدينة</h2>
+                    <p id="weatherDesc"></p>
+                </div>
+                <div class="temperature-section">
+                    <div class="temp-main">
+                        <span id="temperature">--</span>
+                        <span class="unit">°C</span>
+                    </div>
+                    <img id="weatherIcon" src="" alt="Weather icon" class="weather-icon">
+                </div>
+            </div>
+
+            <!-- Weather Details -->
+            <div class="weather-details">
+                <div class="detail-card">
+                    <div class="detail-icon">💧</div>
+                    <div class="detail-info">
+                        <label>الرطوبة</label>
+                        <span id="humidity">--%</span>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">💨</div>
+                    <div class="detail-info">
+                        <label>سرعة الريح</label>
+                        <span id="windSpeed">-- m/s</span>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🔽</div>
+                    <div class="detail-info">
+                        <label>الضغط</label>
+                        <span id="pressure">-- hPa</span>
+                    </div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">👁️</div>
+                    <div class="detail-info">
+                        <label>الرؤية</label>
+                        <span id="visibility">-- km</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5-Day Forecast -->
+            <div class="forecast-section">
+                <h3>توقعات 5 أيام</h3>
+                <div id="forecastContainer" class="forecast-container"></div>
+            </div>
+
+            <!-- Saved Cities -->
+            <div class="saved-cities-section">
+                <h3>المدن المحفوظة</h3>
+                <div id="savedCitiesList" class="saved-cities-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="weather.js"></script>
+</body>
+</html>

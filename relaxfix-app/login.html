@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>تسجيل الدخول</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>تسجيل الدخول</h2>
+
+    <input id="user" placeholder="اسم المستخدم">
+    <input id="pass" type="password" placeholder="كلمة المرور">
+
+    <button onclick="login()">دخول</button>
+
+    <p id="msg"></p>
+</div>
+
+<script>
+function login() {
+    const u = document.getElementById("user").value;
+    const p = document.getElementById("pass").value;
+
+    if (u === "admin" && p === "1234") {
+        location.href = "dashboard.html";
+    } else {
+        document.getElementById("msg").innerText = "خطأ في تسجيل الدخول";
+    }
+}
+</script>
+
+</body>
+</html>

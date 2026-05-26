@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولد النكات العشوائية - RelaxFix PRO OS</title>
+    <link rel="stylesheet" href="jokes.css">
+</head>
+<body>
+    <div class="jokes-container">
+        <div class="header">
+            <h1>😄 مولد النكات العشوائية</h1>
+            <p>اضغط للحصول على نكتة جديدة كل مرة!</p>
+        </div>
+
+        <div class="category-filter">
+            <label for="categorySelect">اختر فئة:</label>
+            <select id="categorySelect" onchange="filterByCategory()">
+                <option value="any">جميع الفئات</option>
+                <option value="programming">برمجة</option>
+                <option value="knock-knock">طرق باب</option>
+                <option value="general">عام</option>
+                <option value="knock-knock">جنرال</option>
+            </select>
+        </div>
+
+        <div id="loading" class="loading hidden">جاري التحميل...</div>
+        <div id="error" class="error-message hidden"></div>
+
+        <div id="jokeContainer" class="joke-container hidden">
+            <div class="joke-card">
+                <div class="joke-type" id="jokeType">النوع</div>
+                <div class="joke-content">
+                    <p id="jokeText">النكتة</p>
+                    <p id="jokeAnswer" class="joke-answer hidden"></p>
+                </div>
+                <button id="revealBtn" onclick="revealAnswer()" class="reveal-btn hidden">اكتشف الإجابة</button>
+                <div class="joke-actions">
+                    <button onclick="copyToClipboard()" class="action-btn copy-btn">
+                        📋 نسخ
+                    </button>
+                    <button onclick="shareJoke()" class="action-btn share-btn">
+                        📤 مشاركة
+                    </button>
+                    <button onclick="addToFavorites()" id="favoriteBtn" class="action-btn favorite-btn">
+                        ❤️ المفضلة
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button onclick="getRandomJoke()" class="get-joke-btn">احصل على نكتة عشوائية</button>
+            <button onclick="toggleFavorites()" class="favorites-btn">⭐ المفضلة</button>
+        </div>
+
+        <div id="favoritesContainer" class="favorites-container hidden">
+            <h2>النكات المفضلة</h2>
+            <div id="favoritesList" class="favorites-list"></div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-label">النكات التي تم تحميلها:</span>
+                <span id="loadedCount" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">النكات المفضلة:</span>
+                <span id="favoriteCount" class="stat-value">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="jokes.js"></script>
+</body>
+</html>

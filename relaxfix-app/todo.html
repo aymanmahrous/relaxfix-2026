@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة المهام - RelaxFix PRO OS</title>
+    <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+    <div class="todo-container">
+        <div class="header">
+            <h1>📝 قائمة مهامي</h1>
+            <p>نظّم مهامك اليومية بسهولة</p>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="todoInput" 
+                    placeholder="أضف مهمة جديدة..."
+                    onkeypress="if(event.key==='Enter') addTodo()"
+                >
+                <select id="prioritySelect">
+                    <option value="low">منخفضة</option>
+                    <option value="medium" selected>متوسطة</option>
+                    <option value="high">عالية</option>
+                </select>
+                <button onclick="addTodo()" class="add-btn">إضافة</button>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <button onclick="filterTodos('all')" class="filter-btn active" data-filter="all">الكل</button>
+            <button onclick="filterTodos('active')" class="filter-btn" data-filter="active">نشطة</button>
+            <button onclick="filterTodos('completed')" class="filter-btn" data-filter="completed">مكتملة</button>
+            <button onclick="clearCompleted()" class="clear-btn">حذف المكتملة</button>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+            <div class="empty-icon">📭</div>
+            <p>لا توجد مهام. أضف واحدة الآن!</p>
+        </div>
+
+        <div id="todosContainer" class="todos-container"></div>
+
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-label">إجمالي:</span>
+                <span id="totalTodos" class="stat-value">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">مكتملة:</span>
+                <span id="completedTodos" class="stat-value">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">نسبة الإنجاز:</span>
+                <span id="completionPercent" class="stat-value">0%</span>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button onclick="exportTodos()" class="action-btn export-btn">📥 تصدير</button>
+            <button onclick="importTodos()" class="action-btn import-btn">📤 استيراد</button>
+            <button onclick="resetTodos()" class="action-btn reset-btn">🔄 إعادة تعيين</button>
+        </div>
+
+        <input type="file" id="importFile" style="display:none" accept=".json" onchange="handleImport(event)">
+    </div>
+
+    <script src="todo.js"></script>
+</body>
+</html>

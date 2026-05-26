@@ -229,6 +229,14 @@ app.get('/', (req, res) => {
 </html>`);
 });
 
+app.use("/app", express.static(path.join(__dirname, "relaxfix-app")));
+
+app.post("/api/order", async (req, res) => {
+    const { name, phone, service, details } = req.body;
+    console.log("طلب جديد:", { name, phone, service });
+    res.json({ success: true, message: "تم استلام طلبك" });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`✅ Server is online on port \${PORT}`);
