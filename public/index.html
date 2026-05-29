@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relax Fix Pro | خدمات الصيانة المنزلية - أبوظبي</title>
+  <meta name="description" content="أفضل خدمات الصيانة المنزلية في أبوظبي - صيانة، ديكورات، عزل، نظافة، دعاية وإعلان">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#1e40af">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --primary-dark: #1e3a8a;
+      --accent: #f59e0b;
+      --accent-light: #fbbf24;
+      --success: #10b981;
+      --danger: #ef4444;
+      --dark: #0f172a;
+      --gray: #64748b;
+      --light: #f8fafc;
+      --gradient: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+      --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      --shadow: 0 10px 40px rgba(30, 64, 175, 0.15);
+      --shadow-lg: 0 25px 60px rgba(30, 64, 175, 0.2);
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* ── Animations ─────────────────────────── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .animate-in { animation: fadeInUp 0.6s ease forwards; opacity: 0; }
+    .animate-delay-1 { animation-delay: 0.1s; }
+    .animate-delay-2 { animation-delay: 0.2s; }
+    .animate-delay-3 { animation-delay: 0.3s; }
+
+    /* ── Header ─────────────────────────────── */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(30, 64, 175, 0.1);
+      transition: all 0.3s ease;
+    }
+    .header.scrolled {
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 45px;
+      height: 45px;
+      background: var(--gradient);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: white;
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+    }
+    .logo-text {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .logo-text span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    .nav-links a:hover {
+      background: rgba(30, 64, 175, 0.08);
+      color: var(--primary);
+    }
+    .nav-cta {
+      background: var(--gradient) !important;
+      color: white !important;
+      padding: 10px 20px !important;
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+    }
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4) !important;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    /* ── Hero ───────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 60px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1e40af 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to top, var(--light), transparent);
+    }
+    .hero-content {
+      max-width: 800px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 8px 20px;
+      border-radius: 50px;
+      color: var(--accent-light);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+      animation: fadeIn 1s ease;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s ease;
+    }
+    .hero h1 span {
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+      opacity: 0;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+      opacity: 0;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 60px;
+      animation: fadeInUp 0.8s ease 0.6s forwards;
+      opacity: 0;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-num {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--accent-light);
+    }
+    .hero-stat-label {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+    }
+
+    /* ── Buttons ────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Tajawal', sans-serif;
+    }
+    .btn-primary {
+      background: var(--gradient-gold);
+      color: var(--dark);
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5);
+    }
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: white;
+      transform: translateY(-3px);
+    }
+    .btn-success {
+      background: var(--success);
+      color: white;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    /* ── Section ────────────────────────────── */
+    .section {
+      padding: 80px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .section-header h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .section-header p {
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+    .section-badge {
+      display: inline-block;
+      background: rgba(30, 64, 175, 0.08);
+      color: var(--primary);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    /* ── Services Filter ────────────────────── */
+    .filter-tabs {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .filter-tab {
+      padding: 10px 24px;
+      border-radius: 50px;
+      border: 2px solid #e2e8f0;
+      background: white;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s;
+      font-family: 'Tajawal', sans-serif;
+    }
+    .filter-tab:hover {
+      border-color: var(--primary-light);
+      color: var(--primary);
+    }
+    .filter-tab.active {
+      background: var(--gradient);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+    }
+
+    /* ── Service Cards ──────────────────────── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid #e2e8f0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+    .service-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .service-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    .service-desc {
+      color: var(--gray);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .service-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .service-price {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+    .service-btn {
+      background: var(--gradient);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Tajawal', sans-serif;
+    }
+    .service-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+    }
+
+    /* ── Plans ──────────────────────────────── */
+    .plans-section {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      padding: 80px 24px;
+      margin: 0;
+      max-width: 100%;
+    }
+    .plans-section .section-header h2 { color: white; }
+    .plans-section .section-header p { color: rgba(255,255,255,0.7); }
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .plan-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 36px;
+      text-align: center;
+      transition: all 0.4s;
+      position: relative;
+      backdrop-filter: blur(10px);
+    }
+    .plan-card.popular {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: var(--accent);
+      transform: scale(1.05);
+    }
+    .plan-card.popular::before {
+      content: '⭐ الأكثر طلباً';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient-gold);
+      color: var(--dark);
+      padding: 4px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .plan-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+    }
+    .plan-card.popular:hover {
+      transform: scale(1.05) translateY(-8px);
+    }
+    .plan-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 16px;
+    }
+    .plan-price {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--accent-light);
+      margin-bottom: 4px;
+    }
+    .plan-price span {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 400;
+    }
+    .plan-period {
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 24px;
+    }
+    .plan-features {
+      list-style: none;
+      text-align: right;
+      margin-bottom: 30px;
+    }
+    .plan-features li {
+      padding: 8px 0;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .plan-features li::before {
+      content: '✓ ';
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    /* ── Offers ─────────────────────────────── */
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .offer-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 32px;
+      border: 2px solid #e2e8f0;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+    .offer-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+      border-color: var(--accent);
+    }
+    .offer-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--danger);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .offer-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      margin-top: 10px;
+    }
+    .offer-desc {
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+    .offer-code {
+      display: inline-block;
+      background: #f1f5f9;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      border: 1px dashed var(--primary-light);
+    }
+
+    /* ── Radar ──────────────────────────────── */
+    .radar-section {
+      background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+      padding: 80px 24px;
+      max-width: 100%;
+      text-align: center;
+    }
+    .radar-section .section-header h2 { color: white; }
+    .radar-section .section-header p { color: rgba(255,255,255,0.7); }
+    .radar-results {
+      max-width: 600px;
+      margin: 30px auto 0;
+      display: none;
+    }
+    .radar-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.1);
+      padding: 16px 24px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      backdrop-filter: blur(5px);
+    }
+    .radar-item-name {
+      color: white;
+      font-weight: 600;
+    }
+    .radar-item-count {
+      background: var(--accent);
+      color: var(--dark);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .radar-total {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--accent-light);
+      margin: 20px 0;
+      display: none;
+    }
+
+    /* ── Contact ────────────────────────────── */
+    .contact-section {
+      background: white;
+      border-radius: var(--radius);
+      padding: 50px;
+      box-shadow: var(--shadow);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.3s;
+      background: #f8fafc;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+      background: white;
+    }
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* ── Footer ─────────────────────────────── */
+    .footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.7);
+      padding: 60px 24px 30px;
+      text-align: center;
+    }
+    .footer-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      text-align: right;
+      margin-bottom: 40px;
+    }
+    .footer-col h4 {
+      color: white;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      padding: 4px 0;
+      transition: color 0.3s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      font-size: 0.9rem;
+    }
+
+    /* ── WhatsApp Float ─────────────────────── */
+    .wa-float {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 999;
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      animation: pulse 2s infinite;
+      transition: transform 0.3s;
+    }
+    .wa-float:hover {
+      transform: scale(1.15);
+    }
+
+    /* ── Modal ──────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: white;
+      border-radius: var(--radius);
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: fadeInUp 0.3s ease;
+    }
+    .modal h3 {
+      font-size: 1.4rem;
+      margin-bottom: 24px;
+      color: var(--dark);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--gray);
+    }
+
+    /* ── Toast ──────────────────────────────── */
+    .toast {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: var(--success);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      z-index: 3000;
+      opacity: 0;
+      transition: all 0.4s;
+      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast.error {
+      background: var(--danger);
+    }
+
+    /* ── Responsive ─────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .hero h1 { font-size: 2rem; }
+      .hero-stats { gap: 20px; }
+      .hero-stat-num { font-size: 1.8rem; }
+      .plans-grid { grid-template-columns: 1fr; }
+      .plan-card.popular { transform: none; }
+      .plan-card.popular:hover { transform: translateY(-8px); }
+      .contact-section { padding: 30px 20px; }
+      .section { padding: 50px 16px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── Loading Skeleton ───────────────────── */
+    .skeleton {
+      background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <div class="logo-icon">🔧</div>
+        <div class="logo-text">Relax <span>Fix</span></div>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#services">الخدمات</a>
+        <a href="#plans">الباقات</a>
+        <a href="#offers">العروض</a>
+        <a href="#radar">الرادار</a>
+        <a href="#contact">تواصل</a>
+        <a href="/admin" class="nav-cta">لوحة التحكم</a>
+      </nav>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🏆 الأول في أبوظبي لخدمات الصيانة</div>
+      <h1>خدمات صيانة منزلية <span>احترافية</span> بين يديك</h1>
+      <p>أكثر من 32 خدمة متخصصة في الصيانة والديكور والعزل والنظافة - فريق محترف يصلك خلال ساعة</p>
+      <div class="hero-buttons">
+        <a href="#services" class="btn btn-primary">🛠️ تصفح الخدمات</a>
+        <a href="https://wa.me/971588259848" target="_blank" class="btn btn-outline">💬 واتساب مباشر</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">32+</div>
+          <div class="hero-stat-label">خدمة متخصصة</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">5000+</div>
+          <div class="hero-stat-label">عميل سعيد</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">⚡</div>
+          <div class="hero-stat-label">استجابة خلال ساعة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="section-header">
+      <div class="section-badge">خدماتنا</div>
+      <h2>32 خدمة احترافية لراحتك</h2>
+      <p>اختر الخدمة المطلوبة وسنكون عندك في أسرع وقت</p>
+    </div>
+    <div class="filter-tabs" id="filterTabs"></div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </section>
+
+  <!-- Plans -->
+  <section class="plans-section" id="plans">
+    <div class="section-header">
+      <div class="section-badge" style="background:rgba(255,255,255,0.1);color:var(--accent-light)">باقات الاشتراك</div>
+      <h2>وفّر أكثر مع باقاتنا</h2>
+      <p>اشترك واحصل على خصومات حصرية وأولوية في الخدمة</p>
+    </div>
+    <div class="plans-grid" id="plansGrid"></div>
+  </section>
+
+  <!-- Offers -->
+  <section class="section" id="offers">
+    <div class="section-header">
+      <div class="section-badge">عروض حصرية</div>
+      <h2>عروض لا تُفوّت 🔥</h2>
+      <p>استفد من خصوماتنا المحدودة قبل انتهائها</p>
+    </div>
+    <div class="offers-grid" id="offersGrid"></div>
+  </section>
+
+  <!-- Radar -->
+  <section class="radar-section" id="radar">
+    <div class="section-header">
+      <div class="section-badge" style="background:rgba(255,255,255,0.1);color:var(--accent-light)">📡 رادار الفرص</div>
+      <h2>اكتشف فرص جديدة</h2>
+      <p>مسح ذكي لاكتشاف طلبات الصيانة من مصادر متعددة</p>
+    </div>
+    <button class="btn btn-primary" onclick="scanRadar()" id="radarBtn">📡 ابدأ المسح</button>
+    <div class="radar-total" id="radarTotal"></div>
+    <div class="radar-results" id="radarResults"></div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="section-header">
+      <div class="section-badge">تواصل معنا</div>
+      <h2>أرسل لنا رسالة</h2>
+      <p>فريقنا جاهز لمساعدتك على مدار الساعة</p>
+    </div>
+    <div class="contact-section">
+      <form id="contactForm" onsubmit="submitContact(event)">
+        <div class="form-group">
+          <label>الاسم الكامل</label>
+          <input type="text" name="name" placeholder="أدخل اسمك" required>
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف</label>
+          <input type="tel" name="phone" placeholder="05xxxxxxxx" required>
+        </div>
+        <div class="form-group">
+          <label>الرسالة</label>
+          <textarea name="message" placeholder="كيف يمكننا مساعدتك؟" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">📨 إرسال الرسالة</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>🔧 Relax Fix</h4>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem">أفضل خدمات الصيانة المنزلية في أبوظبي. فريق محترف وأسعار منافسة.</p>
+      </div>
+      <div class="footer-col">
+        <h4>خدماتنا</h4>
+        <a href="#services">صيانة عامة</a>
+        <a href="#services">ديكورات</a>
+        <a href="#services">عزل</a>
+        <a href="#services">نظافة</a>
+        <a href="#services">دعاية وإعلان</a>
+      </div>
+      <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <a href="#plans">الباقات</a>
+        <a href="#offers">العروض</a>
+        <a href="#radar">رادار الفرص</a>
+        <a href="#contact">تواصل معنا</a>
+      </div>
+      <div class="footer-col">
+        <h4>تواصل</h4>
+        <a href="tel:+971588259848">📞 +971 58 825 9848</a>
+        <a href="https://wa.me/971588259848">💬 واتساب</a>
+        <a href="#">📍 أبوظبي، الإمارات</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Relax Fix Pro. جميع الحقوق محفوظة.
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/971588259848" target="_blank" class="wa-float">💬</a>
+
+  <!-- Order Modal -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal" style="position:relative">
+      <button class="modal-close" onclick="closeModal('orderModal')">✕</button>
+      <h3>🛠️ طلب خدمة</h3>
+      <form id="orderForm" onsubmit="submitOrder(event)">
+        <input type="hidden" name="service" id="orderService">
+        <div class="form-group">
+          <label>الاسم</label>
+          <input type="text" name="name" placeholder="اسمك الكامل" required>
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف</label>
+          <input type="tel" name="phone" placeholder="05xxxxxxxx" required>
+        </div>
+        <div class="form-group">
+          <label>المنطقة</label>
+          <select name="area" id="orderArea"></select>
+        </div>
+        <div class="form-group">
+          <label>تفاصيل إضافية</label>
+          <textarea name="message" placeholder="صف المشكلة أو الخدمة المطلوبة..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">✅ تأكيد الطلب</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Subscribe Modal -->
+  <div class="modal-overlay" id="subscribeModal">
+    <div class="modal" style="position:relative">
+      <button class="modal-close" onclick="closeModal('subscribeModal')">✕</button>
+      <h3>💎 اشترك في الباقة</h3>
+      <form id="subscribeForm" onsubmit="submitSubscribe(event)">
+        <input type="hidden" name="plan" id="subscribePlan">
+        <div class="form-group">
+          <label>الاسم</label>
+          <input type="text" name="name" placeholder="اسمك الكامل" required>
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف</label>
+          <input type="tel" name="phone" placeholder="05xxxxxxxx" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">✅ تأكيد الاشتراك</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── Data Cache ──────────────────────────────
+    let servicesData = [];
+    let categoriesData = [];
+    let currentFilter = 'all';
+
+    // ── Init ────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      loadServices();
+      loadPlans();
+      loadOffers();
+      loadAreas();
+      initScrollEffects();
+    });
+
+    // ── Load Services ───────────────────────────
+    async function loadServices() {
+      try {
+        const res = await fetch('/api/services');
+        const data = await res.json();
+        servicesData = data.services;
+
+        const catRes = await fetch('/api/categories');
+        const catData = await catRes.json();
+        categoriesData = catData.categories;
+
+        renderFilters();
+        renderServices(servicesData);
+      } catch (e) {
+        console.error('Error loading services:', e);
+      }
+    }
+
+    function renderFilters() {
+      const container = document.getElementById('filterTabs');
+      container.innerHTML = categoriesData.map(cat => `
+        <button class="filter-tab ${cat.id === 'all' ? 'active' : ''}"
+                onclick="filterServices('${cat.id}', this)">
+          ${cat.icon} ${cat.name}
+        </button>
+      `).join('');
+    }
+
+    function filterServices(catId, btn) {
+      currentFilter = catId;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filtered = catId === 'all'
+        ? servicesData
+        : servicesData.filter(s => s.category === catId);
+      renderServices(filtered);
+    }
+
+    function renderServices(services) {
+      const grid = document.getElementById('servicesGrid');
+      grid.innerHTML = services.map((s, i) => `
+        <div class="service-card animate-in" style="animation-delay:${i * 0.05}s">
+          <span class="service-icon">${s.icon}</span>
+          <div class="service-name">${s.name}</div>
+          <div class="service-desc">${s.description}</div>
+          <div class="service-footer">
+            <span class="service-price">${s.price}</span>
+            <button class="service-btn" onclick="openOrderModal('${s.name}')">اطلب الآن</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ── Load Plans ──────────────────────────────
+    async function loadPlans() {
+      try {
+        const res = await fetch('/api/plans');
+        const data = await res.json();
+        const grid = document.getElementById('plansGrid');
+        grid.innerHTML = data.plans.map(plan => `
+          <div class="plan-card ${plan.popular ? 'popular' : ''}">
+            <div class="plan-name">${plan.name}</div>
+            <div class="plan-price">${plan.price} <span>د.إ</span></div>
+            <div class="plan-period">${plan.period}</div>
+            <ul class="plan-features">
+              ${plan.features.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+            <button class="btn btn-primary" style="width:100%" onclick="openSubscribeModal('${plan.name}')">
+              اشترك الآن
+            </button>
+          </div>
+        `).join('');
+      } catch (e) {
+        console.error('Error loading plans:', e);
+      }
+    }
+
+    // ── Load Offers ─────────────────────────────
+    async function loadOffers() {
+      try {
+        const res = await fetch('/api/offers');
+        const data = await res.json();
+        const grid = document.getElementById('offersGrid');
+        grid.innerHTML = data.offers.map(offer => `
+          <div class="offer-card">
+            <div class="offer-badge">خصم ${offer.discount}</div>
+            <div class="offer-title">${offer.title}</div>
+            <div class="offer-desc">${offer.description}</div>
+            <div class="offer-code">${offer.code}</div>
+            <br>
+            <button class="btn btn-success" onclick="claimOffer(${offer.id}, '${offer.title}')">
+              🎁 اطلب العرض
+            </button>
+          </div>
+        `).join('');
+      } catch (e) {
+        console.error('Error loading offers:', e);
+      }
+    }
+
+    // ── Load Areas ──────────────────────────────
+    async function loadAreas() {
+      try {
+        const res = await fetch('/api/areas');
+        const data = await res.json();
+        const select = document.getElementById('orderArea');
+        select.innerHTML = '<option value="">اختر المنطقة</option>'
+          + data.areas.map(a => `<option value="${a}">${a}</option>`).join('');
+      } catch (e) {
+        console.error('Error loading areas:', e);
+      }
+    }
+
+    // ── Radar Scanner ───────────────────────────
+    async function scanRadar() {
+      const btn = document.getElementById('radarBtn');
+      btn.textContent = '⏳ جاري المسح...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/api/scanner');
+        const data = await res.json();
+
+        document.getElementById('radarTotal').style.display = 'block';
+        document.getElementById('radarTotal').textContent = `🎯 ${data.total} فرصة`;
+
+        const results = document.getElementById('radarResults');
+        results.style.display = 'block';
+        results.innerHTML = data.sources.map(s => `
+          <div class="radar-item">
+            <span class="radar-item-name">${s.name} - ${s.type}</span>
+            <span class="radar-item-count">${s.opportunities} فرصة</span>
+          </div>
+        `).join('');
+
+        showToast(`تم اكتشاف ${data.total} فرصة جديدة!`);
+      } catch (e) {
+        showToast('خطأ في المسح', true);
+      }
+
+      btn.textContent = '📡 مسح مرة أخرى';
+      btn.disabled = false;
+    }
+
+    // ── Modals ──────────────────────────────────
+    function openOrderModal(serviceName) {
+      document.getElementById('orderService').value = serviceName;
+      document.getElementById('orderModal').classList.add('active');
+    }
+
+    function openSubscribeModal(planName) {
+      document.getElementById('subscribePlan').value = planName;
+      document.getElementById('subscribeModal').classList.add('active');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Close modal on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.classList.remove('active');
+      });
+    });
+
+    // ── Form Submissions ────────────────────────
+    async function submitOrder(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form));
+
+      try {
+        const res = await fetch('/api/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          showToast('تم إرسال طلبك بنجاح! ✅');
+          closeModal('orderModal');
+          form.reset();
+          // Open WhatsApp
+          if (result.whatsappUrl) {
+            setTimeout(() => window.open(result.whatsappUrl, '_blank'), 1000);
+          }
+        } else {
+          showToast(result.error || 'حدث خطأ', true);
+        }
+      } catch (e) {
+        showToast('خطأ في الاتصال', true);
+      }
+    }
+
+    async function submitContact(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form));
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          showToast('تم إرسال رسالتك بنجاح! ✅');
+          form.reset();
+        } else {
+          showToast(result.error || 'حدث خطأ', true);
+        }
+      } catch (e) {
+        showToast('خطأ في الاتصال', true);
+      }
+    }
+
+    async function submitSubscribe(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form));
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          showToast('تم تسجيل اشتراكك بنجاح! 💎');
+          closeModal('subscribeModal');
+          form.reset();
+        } else {
+          showToast(result.error || 'حدث خطأ', true);
+        }
+      } catch (e) {
+        showToast('خطأ في الاتصال', true);
+      }
+    }
+
+    async function claimOffer(offerId, title) {
+      const name = prompt('أدخل اسمك:');
+      if (!name) return;
+      const phone = prompt('أدخل رقم هاتفك:');
+      if (!phone) return;
+
+      try {
+        const res = await fetch('/api/offers/claim', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, offerId })
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          showToast(`تم تسجيل طلبك لعرض "${title}" ✅`);
+        }
+      } catch (e) {
+        showToast('خطأ في الاتصال', true);
+      }
+    }
+
+    // ── Toast ───────────────────────────────────
+    function showToast(msg, isError = false) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(() => toast.className = 'toast', 3000);
+    }
+
+    // ── Scroll Effects ──────────────────────────
+    function initScrollEffects() {
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      // Intersection Observer for animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.section-header, .plan-card, .offer-card').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    // ── Mobile Menu ─────────────────────────────
+    function toggleMobileMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+      nav.style.position = 'absolute';
+      nav.style.top = '70px';
+      nav.style.right = '16px';
+      nav.style.background = 'white';
+      nav.style.flexDirection = 'column';
+      nav.style.padding = '16px';
+      nav.style.borderRadius = '12px';
+      nav.style.boxShadow = '0 10px 40px rgba(0,0,0,0.15)';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم | Relax Fix Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-light: #3b82f6;
+      --accent: #f59e0b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --dark: #0f172a;
+      --gray: #64748b;
+      --light: #f1f5f9;
+      --radius: 16px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--light);
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 260px;
+      height: 100vh;
+      background: var(--dark);
+      padding: 24px 16px;
+      overflow-y: auto;
+      z-index: 100;
+    }
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px;
+      margin-bottom: 30px;
+    }
+    .sidebar-logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    .sidebar-logo-text {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      border-radius: 10px;
+      margin-bottom: 4px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    .sidebar-nav a.active {
+      background: var(--primary);
+    }
+
+    /* Main */
+    .main {
+      margin-right: 260px;
+      padding: 30px;
+    }
+
+    /* Top Bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+    .topbar h1 {
+      font-size: 1.6rem;
+      color: var(--dark);
+    }
+    .topbar-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+    .stat-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+    .stat-card-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--dark);
+    }
+    .stat-card-label {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    /* Table */
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .card-header h3 {
+      font-size: 1.2rem;
+      color: var(--dark);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: right;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    th {
+      background: var(--light);
+      font-weight: 600;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+    td {
+      font-size: 0.95rem;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .status-new {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+    .status-completed {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .status-pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    /* Login */
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .login-box {
+      background: white;
+      padding: 40px;
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .login-box h2 {
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    .login-box p {
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Tajawal', sans-serif;
+      margin-bottom: 16px;
+    }
+    .login-box input:focus {
+      outline: none;
+      border-color: var(--primary-light);
+    }
+    .login-box button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #1e40af, #7c3aed);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+    }
+    .login-error {
+      color: var(--danger);
+      font-size: 0.9rem;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.3s;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .quick-action {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .quick-action:hover {
+      border-color: var(--primary-light);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .quick-action-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+    .quick-action-label {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-right: 0; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+      <h2>🔐 لوحة التحكم</h2>
+      <p>أدخل كلمة المرور للوصول</p>
+      <input type="password" id="loginPass" placeholder="كلمة المرور" onkeypress="if(event.key==='Enter')doLogin()">
+      <button onclick="doLogin()">دخول</button>
+      <div class="login-error" id="loginError">كلمة المرور غير صحيحة</div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">🔧</div>
+      <div class="sidebar-logo-text">Relax Fix</div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="active">📊 الرئيسية</a>
+      <a href="#orders-section">📋 الطلبات</a>
+      <a href="#services-section">🛠️ الخدمات</a>
+      <a href="/ad-design">🎨 تصميم إعلان</a>
+      <a href="/">🌐 الموقع</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main" id="mainContent" style="display:none">
+    <div class="topbar">
+      <h1>📊 لوحة التحكم</h1>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" onclick="refreshData()">🔄 تحديث</button>
+        <button class="btn btn-danger" onclick="logout()">خروج</button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card-icon" style="background:#dbeafe">📋</div>
+        <div class="stat-card-value" id="statOrders">0</div>
+        <div class="stat-card-label">إجمالي الطلبات</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon" style="background:#d1fae5">✅</div>
+        <div class="stat-card-value" id="statNew">0</div>
+        <div class="stat-card-label">طلبات جديدة</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon" style="background:#fef3c7">🛠️</div>
+        <div class="stat-card-value" id="statServices">32</div>
+        <div class="stat-card-label">خدمة متاحة</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon" style="background:#ede9fe">📍</div>
+        <div class="stat-card-value" id="statAreas">17</div>
+        <div class="stat-card-label">منطقة تغطية</div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <div class="quick-action" onclick="window.open('https://wa.me/971588259848','_blank')">
+        <div class="quick-action-icon">💬</div>
+        <div class="quick-action-label">واتساب</div>
+      </div>
+      <div class="quick-action" onclick="scanRadarAdmin()">
+        <div class="quick-action-icon">📡</div>
+        <div class="quick-action-label">مسح الرادار</div>
+      </div>
+      <div class="quick-action" onclick="window.location='/ad-design'">
+        <div class="quick-action-icon">🎨</div>
+        <div class="quick-action-label">تصميم إعلان</div>
+      </div>
+      <div class="quick-action" onclick="window.location='/'">
+        <div class="quick-action-icon">🌐</div>
+        <div class="quick-action-label">الموقع</div>
+      </div>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="card" id="orders-section">
+      <div class="card-header">
+        <h3>📋 آخر الطلبات</h3>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>الاسم</th>
+            <th>الهاتف</th>
+            <th>الخدمة</th>
+            <th>المنطقة</th>
+            <th>الحالة</th>
+            <th>التاريخ</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTable">
+          <tr><td colspan="6" style="text-align:center;color:var(--gray)">لا توجد طلبات بعد - ستظهر هنا عند ربط Supabase</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Services -->
+    <div class="card" id="services-section">
+      <div class="card-header">
+        <h3>🛠️ الخدمات المتاحة</h3>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>الخدمة</th>
+            <th>القسم</th>
+            <th>السعر</th>
+          </tr>
+        </thead>
+        <tbody id="servicesTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    let adminPass = '';
+
+    function doLogin() {
+      const pass = document.getElementById('loginPass').value;
+      if (!pass) return;
+      adminPass = pass;
+
+      // Try fetching orders to validate
+      fetch(`/api/orders?pass=${encodeURIComponent(pass)}`)
+        .then(r => {
+          if (r.status === 401) {
+            document.getElementById('loginError').style.display = 'block';
+            return null;
+          }
+          return r.json();
+        })
+        .then(data => {
+          if (data) {
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            loadDashboard(data);
+          }
+        })
+        .catch(() => {
+          // If Supabase not connected, allow with default pass
+          if (pass === 'admin123') {
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            loadDashboard({ orders: [] });
+          } else {
+            document.getElementById('loginError').style.display = 'block';
+          }
+        });
+    }
+
+    function loadDashboard(data) {
+      if (data && data.orders) {
+        document.getElementById('statOrders').textContent = data.orders.length;
+        document.getElementById('statNew').textContent = data.orders.filter(o => o.status === 'new').length;
+
+        if (data.orders.length > 0) {
+          document.getElementById('ordersTable').innerHTML = data.orders.slice(0, 20).map(o => `
+            <tr>
+              <td>${o.name}</td>
+              <td>${o.phone}</td>
+              <td>${o.service}</td>
+              <td>${o.area || '-'}</td>
+              <td><span class="status-badge status-${o.status}">${o.status === 'new' ? 'جديد' : o.status === 'completed' ? 'مكتمل' : 'قيد التنفيذ'}</span></td>
+              <td>${new Date(o.created_at).toLocaleDateString('ar-AE')}</td>
+            </tr>
+          `).join('');
+        }
+      }
+
+      // Load services
+      fetch('/api/services').then(r => r.json()).then(d => {
+        document.getElementById('statServices').textContent = d.services.length;
+        document.getElementById('servicesTable').innerHTML = d.services.map((s, i) => `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${s.icon} ${s.name}</td>
+            <td>${s.category}</td>
+            <td>${s.price}</td>
+          </tr>
+        `).join('');
+      });
+    }
+
+    function refreshData() {
+      fetch(`/api/orders?pass=${encodeURIComponent(adminPass)}`)
+        .then(r => r.json())
+        .then(data => loadDashboard(data));
+    }
+
+    async function scanRadarAdmin() {
+      const res = await fetch('/api/scanner');
+      const data = await res.json();
+      alert(`📡 تم اكتشاف ${data.total} فرصة جديدة!\n\n${data.sources.map(s => `${s.name}: ${s.opportunities} فرصة`).join('\n')}`);
+    }
+
+    function logout() {
+      adminPass = '';
+      document.getElementById('loginOverlay').style.display = 'flex';
+      document.getElementById('mainContent').style.display = 'none';
+      document.getElementById('loginPass').value = '';
+    }
+  </script>
+</body>
+</html>

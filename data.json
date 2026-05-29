@@ -1,0 +1,106 @@
+{
+  "services": [
+    {"id": 1, "name": "صيانة مكيفات", "category": "maintenance", "icon": "❄️", "price": "من 150 د.إ", "description": "تنظيف وصيانة وإصلاح جميع أنواع المكيفات المنزلية والمركزية"},
+    {"id": 2, "name": "صيانة سباكة", "category": "maintenance", "icon": "🔧", "price": "من 120 د.إ", "description": "إصلاح التسريبات وتركيب الأنابيب والصنابير"},
+    {"id": 3, "name": "صيانة كهرباء", "category": "maintenance", "icon": "⚡", "price": "من 100 د.إ", "description": "إصلاح الأعطال الكهربائية وتركيب الإضاءة والمفاتيح"},
+    {"id": 4, "name": "صيانة غسالات", "category": "maintenance", "icon": "🫧", "price": "من 130 د.إ", "description": "إصلاح وصيانة جميع أنواع الغسالات"},
+    {"id": 5, "name": "صيانة ثلاجات", "category": "maintenance", "icon": "🧊", "price": "من 140 د.إ", "description": "إصلاح وصيانة الثلاجات والفريزرات"},
+    {"id": 6, "name": "صيانة أفران", "category": "maintenance", "icon": "🔥", "price": "من 110 د.إ", "description": "إصلاح وصيانة الأفران والطباخات"},
+    {"id": 7, "name": "صيانة سخانات", "category": "maintenance", "icon": "♨️", "price": "من 100 د.إ", "description": "إصلاح وتركيب سخانات المياه"},
+    {"id": 8, "name": "صيانة أبواب", "category": "maintenance", "icon": "🚪", "price": "من 80 د.إ", "description": "إصلاح وتركيب الأبواب والأقفال"},
+    {"id": 9, "name": "دهان داخلي", "category": "decoration", "icon": "🎨", "price": "من 200 د.إ", "description": "دهان الجدران الداخلية بأحدث الألوان والتقنيات"},
+    {"id": 10, "name": "دهان خارجي", "category": "decoration", "icon": "🖌️", "price": "من 300 د.إ", "description": "دهان واجهات المباني والفلل"},
+    {"id": 11, "name": "ورق جدران", "category": "decoration", "icon": "🖼️", "price": "من 250 د.إ", "description": "تركيب ورق جدران ثلاثي الأبعاد وكلاسيكي"},
+    {"id": 12, "name": "جبس بورد", "category": "decoration", "icon": "✨", "price": "من 350 د.إ", "description": "تصميم وتركيب أسقف جبس بورد مع إضاءة مخفية"},
+    {"id": 13, "name": "تصميم داخلي", "category": "decoration", "icon": "🏠", "price": "من 500 د.إ", "description": "تصميم ديكور داخلي كامل للشقق والفلل"},
+    {"id": 14, "name": "أرضيات", "category": "decoration", "icon": "🪵", "price": "من 180 د.إ", "description": "تركيب باركيه وسيراميك وبورسلين"},
+    {"id": 15, "name": "عزل أسطح", "category": "insulation", "icon": "🏗️", "price": "من 400 د.إ", "description": "عزل حراري ومائي للأسطح والمباني"},
+    {"id": 16, "name": "عزل خزانات", "category": "insulation", "icon": "💧", "price": "من 350 د.إ", "description": "عزل خزانات المياه ومنع التسريب"},
+    {"id": 17, "name": "عزل حمامات", "category": "insulation", "icon": "🚿", "price": "من 300 د.إ", "description": "عزل مائي للحمامات والمطابخ"},
+    {"id": 18, "name": "عزل صوتي", "category": "insulation", "icon": "🔇", "price": "من 450 د.إ", "description": "عزل صوتي للغرف والمكاتب"},
+    {"id": 19, "name": "كشف تسريبات", "category": "insulation", "icon": "🔍", "price": "من 200 د.إ", "description": "كشف تسريبات المياه بأحدث الأجهزة"},
+    {"id": 20, "name": "تنظيف شقق", "category": "cleaning", "icon": "🧹", "price": "من 250 د.إ", "description": "تنظيف شامل للشقق والاستوديوهات"},
+    {"id": 21, "name": "تنظيف فلل", "category": "cleaning", "icon": "🏡", "price": "من 500 د.إ", "description": "تنظيف شامل للفلل مع التعقيم"},
+    {"id": 22, "name": "تنظيف مكاتب", "category": "cleaning", "icon": "🏢", "price": "من 300 د.إ", "description": "تنظيف وتعقيم المكاتب والشركات"},
+    {"id": 23, "name": "تنظيف كنب", "category": "cleaning", "icon": "🛋️", "price": "من 150 د.إ", "description": "تنظيف بالبخار للكنب والسجاد"},
+    {"id": 24, "name": "تنظيف خزانات", "category": "cleaning", "icon": "🪣", "price": "من 200 د.إ", "description": "تنظيف وتعقيم خزانات المياه"},
+    {"id": 25, "name": "مكافحة حشرات", "category": "cleaning", "icon": "🐛", "price": "من 180 د.إ", "description": "رش مبيدات ومكافحة جميع أنواع الحشرات"},
+    {"id": 26, "name": "تصميم لوجو", "category": "advertising", "icon": "💎", "price": "من 500 د.إ", "description": "تصميم شعارات احترافية للشركات"},
+    {"id": 27, "name": "تصميم هوية", "category": "advertising", "icon": "📋", "price": "من 1500 د.إ", "description": "تصميم هوية بصرية كاملة للعلامة التجارية"},
+    {"id": 28, "name": "إدارة سوشيال ميديا", "category": "advertising", "icon": "📱", "price": "من 2000 د.إ", "description": "إدارة حسابات التواصل الاجتماعي والمحتوى"},
+    {"id": 29, "name": "تصوير منتجات", "category": "advertising", "icon": "📸", "price": "من 300 د.إ", "description": "تصوير احترافي للمنتجات والخدمات"},
+    {"id": 30, "name": "إعلانات ممولة", "category": "advertising", "icon": "📢", "price": "من 1000 د.إ", "description": "إدارة حملات إعلانية على جوجل وفيسبوك"},
+    {"id": 31, "name": "تصميم موقع", "category": "advertising", "icon": "🌐", "price": "من 3000 د.إ", "description": "تصميم وتطوير مواقع إلكترونية احترافية"},
+    {"id": 32, "name": "فيديو إعلاني", "category": "advertising", "icon": "🎬", "price": "من 2000 د.إ", "description": "إنتاج فيديوهات إعلانية وموشن جرافيك"}
+  ],
+  "categories": [
+    {"id": "all", "name": "الكل", "icon": "🏠"},
+    {"id": "maintenance", "name": "صيانة", "icon": "🔧"},
+    {"id": "decoration", "name": "ديكورات", "icon": "🎨"},
+    {"id": "insulation", "name": "عزل", "icon": "🏗️"},
+    {"id": "cleaning", "name": "نظافة", "icon": "🧹"},
+    {"id": "advertising", "name": "دعاية وإعلان", "icon": "📢"}
+  ],
+  "plans": [
+    {
+      "id": 1,
+      "name": "الباقة الأساسية",
+      "price": "299",
+      "period": "شهرياً",
+      "features": ["زيارة صيانة واحدة شهرياً", "خصم 10% على الخدمات", "أولوية في الحجز", "دعم عبر واتساب"],
+      "color": "#10b981",
+      "popular": false
+    },
+    {
+      "id": 2,
+      "name": "الباقة المميزة",
+      "price": "599",
+      "period": "شهرياً",
+      "features": ["3 زيارات صيانة شهرياً", "خصم 25% على الخدمات", "أولوية قصوى", "دعم 24/7", "فحص دوري مجاني", "ضمان سنة على الأعمال"],
+      "color": "#f59e0b",
+      "popular": true
+    },
+    {
+      "id": 3,
+      "name": "الباقة الذهبية",
+      "price": "999",
+      "period": "شهرياً",
+      "features": ["زيارات غير محدودة", "خصم 40% على الخدمات", "فني مخصص", "دعم VIP 24/7", "فحص شهري شامل", "ضمان سنتين", "تقرير شهري", "أولوية مطلقة"],
+      "color": "#8b5cf6",
+      "popular": false
+    }
+  ],
+  "offers": [
+    {
+      "id": 1,
+      "title": "عرض الصيف 🔥",
+      "description": "خصم 30% على صيانة المكيفات",
+      "discount": "30%",
+      "validUntil": "2026-08-31",
+      "code": "SUMMER30"
+    },
+    {
+      "id": 2,
+      "title": "باقة العروسين 💍",
+      "description": "تنظيف + دهان + ديكور بسعر خاص",
+      "discount": "25%",
+      "validUntil": "2026-12-31",
+      "code": "NEWLYWED25"
+    },
+    {
+      "id": 3,
+      "title": "عرض الشركات 🏢",
+      "description": "صيانة شاملة للمكاتب - عقد سنوي",
+      "discount": "35%",
+      "validUntil": "2026-12-31",
+      "code": "CORP35"
+    }
+  ],
+  "areas": [
+    "أبوظبي - المدينة", "أبوظبي - الخالدية", "أبوظبي - المرور",
+    "أبوظبي - المصفح", "أبوظبي - بني ياس", "أبوظبي - الشامخة",
+    "أبوظبي - محمد بن زايد", "أبوظبي - الريف", "أبوظبي - الرحبة",
+    "العين", "الظفرة", "جزيرة ياس", "جزيرة السعديات", "جزيرة الريم",
+    "مدينة خليفة", "مدينة شخبوط", "مدينة زايد"
+  ]
+}
