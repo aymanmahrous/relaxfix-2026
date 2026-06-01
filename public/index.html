@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Relax Fix Pro | صيانة منزلية احترافية في أبوظبي</title>
+  <title>Relaxfix Pro - خدمات الصيانة المنزلية</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -13,7 +13,7 @@
     .en { font-family: 'Montserrat', sans-serif; }
     .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
     .gold-text { background: linear-gradient(to right, #D4AF37, #F5E050); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .btn-primary { background: linear-gradient(45deg, #D4AF37, #B8860B); color: white; padding: 12px 30px; border-radius: 50px; font-weight: 800; transition: all 0.3s; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); }
+    .btn-primary { background: linear-gradient(45deg, #D4AF37, #B8860B); color: white; padding: 12px 30px; border-radius: 50px; font-weight: 800; transition: all 0.3s; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
     .btn-primary:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4); }
     .card-hover:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-color: var(--gold); }
   </style>
@@ -29,16 +29,16 @@
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 bg-gradient-to-tr from-yellow-500 to-yellow-700 rounded-lg flex items-center justify-center font-black text-xl">R</div>
-        <span class="text-2xl font-black tracking-tighter">RELAX FIX <span class="gold-text">PRO</span></span>
+        <span class="text-2xl font-black tracking-tighter">RELAXFIX <span class="gold-text">PRO</span></span>
       </div>
       <nav class="hidden md:flex gap-8 font-bold">
-        <a href="#home" class="hover:text-yellow-500 transition-all" data-i18n="nav_home">الرئيسية</a>
-        <a href="#services" class="hover:text-yellow-500 transition-all" data-i18n="nav_services">الخدمات</a>
-        <a href="#booking" class="hover:text-yellow-500 transition-all" data-i18n="nav_book">احجز الآن</a>
+        <a href="#home" class="hover:text-yellow-500 transition-all">الرئيسية</a>
+        <a href="#services" class="hover:text-yellow-500 transition-all">الخدمات</a>
+        <a href="#booking" class="hover:text-yellow-500 transition-all">احجز الآن</a>
       </nav>
       <div class="flex items-center gap-4">
         <button onclick="toggleLang()" class="lang-btn border border-yellow-500/30 px-4 py-1 rounded-full text-sm font-bold">EN</button>
-        <a href="#booking" class="btn-primary text-sm" data-i18n="btn_book">احجز الآن</a>
+        <a href="#booking" class="btn-primary text-sm">احجز الآن</a>
       </div>
     </div>
   </header>
@@ -47,16 +47,16 @@
   <section id="home" class="min-h-screen pt-32 flex items-center relative overflow-hidden">
     <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
       <div class="space-y-8">
-        <div class="inline-block px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-yellow-500 font-black text-sm tracking-widest uppercase" data-i18n="hero_tag">أفضل صيانة في أبوظبي 2026</div>
+        <div class="inline-block px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-yellow-500 font-black text-sm tracking-widest uppercase">أفضل صيانة منزلية</div>
         <h1 class="text-6xl lg:text-8xl font-black leading-tight">
-          <span data-i18n="hero_title1">منزلك يستحق</span><br>
-          <span class="gold-text" data-i18n="hero_title2">العناية الملكية</span>
+          <span>منزلك يستحق</span><br>
+          <span class="gold-text">العناية الملكية</span>
         </h1>
-        <p class="text-xl text-slate-400 max-w-lg leading-relaxed font-medium" data-i18n="hero_desc">نقدم خدمات صيانة متكاملة بأعلى معايير الجودة العالمية في قلب أبوظبي. تكييف، سباكة، كهرباء، وأكثر بضغطة زر.</p>
+        <p class="text-xl text-slate-400 max-w-lg leading-relaxed font-medium">نقدم خدمات صيانة متكاملة بأعلى معايير الجودة العالمية. تكييف، سباكة، كهرباء وأكثر.</p>
         <div class="flex gap-4">
-          <a href="#booking" class="btn-primary text-xl" data-i18n="btn_start">ابدأ رحلتك معنا</a>
+          <a href="#booking" class="btn-primary text-xl">ابدأ رحلتك معنا</a>
           <a href="tel:971588259848" class="px-8 py-4 border border-slate-700 rounded-full font-bold hover:bg-slate-800 transition-all flex items-center gap-3">
-            <span>📞</span> <span data-i18n="btn_call">اتصال سريع</span>
+            <span>📞</span> <span>اتصال سريع</span>
           </a>
         </div>
       </div>
@@ -71,8 +71,8 @@
   <!-- Services Section -->
   <section id="services" class="py-32 bg-slate-900/50">
     <div class="container mx-auto px-6 text-center mb-20">
-      <h2 class="text-5xl font-black mb-6" data-i18n="services_title">خدماتنا الرئيسية</h2>
-      <p class="text-slate-400 max-w-2xl mx-auto text-lg font-medium" data-i18n="services_desc">اختر القسم الذي تحتاجه واستكشف أكثر من 32 خدمة متخصصة.</p>
+      <h2 class="text-5xl font-black mb-6">خدماتنا الرئيسية</h2>
+      <p class="text-slate-400 max-w-2xl mx-auto text-lg font-medium">اختر الخدمة التي تحتاجها واحصل على أفضل الفنيين</p>
     </div>
     <div class="container mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-8" id="servicesGrid">
       <!-- Services injected here -->
@@ -83,83 +83,76 @@
   <section id="booking" class="py-32 relative">
     <div class="container mx-auto px-6 max-w-4xl">
       <div class="glass p-10 rounded-[3rem] shadow-2xl border-yellow-500/10">
-        <h2 class="text-4xl font-black text-center mb-10" data-i18n="booking_title">احجز فنيك الآن</h2>
+        <h2 class="text-4xl font-black text-center mb-10">احجز فنيك الآن</h2>
         <form id="bookingForm" class="grid md:grid-cols-2 gap-8">
-          <input type="text" id="name" required class="p-4 bg-slate-800 border border-slate-700 rounded-2xl" placeholder="الاسم الكامل" data-i18n-placeholder="label_name">
-          <input type="tel" id="phone" required class="p-4 bg-slate-800 border border-slate-700 rounded-2xl" placeholder="رقم الهاتف" data-i18n-placeholder="label_phone">
-          <select id="area" class="p-4 bg-slate-800 border border-slate-700 rounded-2xl">
-            <option value="Yas Island">جزيرة ياس</option>
-            <option value="Reem Island">جزيرة الريم</option>
-            <option value="Khalifa City">مدينة خليفة</option>
-            <option value="Corniche">الكورنيش</option>
+          <input type="text" id="name" required class="p-4 bg-slate-800 border border-slate-700 rounded-2xl text-white" placeholder="الاسم الكامل">
+          <input type="tel" id="phone" required class="p-4 bg-slate-800 border border-slate-700 rounded-2xl text-white" placeholder="رقم الهاتف">
+          <input type="text" id="area" class="p-4 bg-slate-800 border border-slate-700 rounded-2xl text-white" placeholder="المنطقة">
+          <select id="service" class="p-4 bg-slate-800 border border-slate-700 rounded-2xl text-white">
+            <option value="">اختر الخدمة</option>
           </select>
-          <select id="service" class="p-4 bg-slate-800 border border-slate-700 rounded-2xl">
-            <!-- Services injected here -->
-          </select>
-          <input type="date" id="date" class="p-4 bg-slate-800 border border-slate-700 rounded-2xl">
-          <input type="time" id="time" class="p-4 bg-slate-800 border border-slate-700 rounded-2xl">
-          <button type="submit" class="md:col-span-2 btn-primary text-xl py-5" data-i18n="btn_confirm">تأكيد الحجز</button>
+          <input type="date" id="date" class="p-4 bg-slate-800 border border-slate-700 rounded-2xl text-white">
+          <input type="time" id="time" class="p-4 bg-slate-800 border border-slate-700 rounded-2xl text-white">
+          <button type="submit" class="md:col-span-2 btn-primary text-xl py-5">تأكيد الحجز</button>
         </form>
       </div>
     </div>
   </section>
 
-  <script>
-    const translations = {
-      ar: {
-        nav_home: "الرئيسية", nav_services: "الخدمات", nav_book: "احجز الآن",
-        btn_book: "احجز الآن", hero_tag: "أفضل صيانة في أبوظبي 2026",
-        hero_title1: "منزلك يستحق", hero_title2: "العناية الملكية",
-        hero_desc: "نقدم خدمات صيانة متكاملة بأعلى معايير الجودة العالمية في قلب أبوظبي. تكييف، سباكة، كهرباء، وأكثر بضغطة زر.",
-        btn_start: "ابدأ رحلتك معنا", btn_call: "اتصال سريع",
-        services_title: "خدماتنا الرئيسية", services_desc: "اختر القسم الذي تحتاجه واستكشف أكثر من 32 خدمة متخصصة.",
-        booking_title: "احجز فنيك الآن", label_name: "الاسم الكامل", label_phone: "رقم الهاتف", btn_confirm: "تأكيد الحجز"
-      },
-      en: {
-        nav_home: "Home", nav_services: "Services", nav_book: "Book Now",
-        btn_book: "Book Now", hero_tag: "BEST MAINTENANCE IN ABU DHABI 2026",
-        hero_title1: "Your Home Deserves", hero_title2: "Royal Care",
-        hero_desc: "We provide integrated maintenance services with the highest international quality standards in Abu Dhabi.",
-        btn_start: "Start Your Journey", btn_call: "Quick Call",
-        services_title: "Our Core Services", services_desc: "Choose your category and explore 32+ specialized services.",
-        booking_title: "Book Your Pro Now", label_name: "Full Name", label_phone: "Phone Number", btn_confirm: "Confirm Booking"
-      }
-    };
+  <!-- Admin Dashboard -->
+  <section id="admin" class="py-32 bg-slate-900/50" style="display:none;">
+    <div class="container mx-auto px-6 max-w-6xl">
+      <h2 class="text-4xl font-black text-center mb-10">لوحة التحكم</h2>
+      <div class="glass p-10 rounded-[2.5rem] overflow-x-auto">
+        <table class="w-full text-right">
+          <thead>
+            <tr class="border-b border-slate-700">
+              <th class="py-4 px-4 font-black">الاسم</th>
+              <th class="py-4 px-4 font-black">الهاتف</th>
+              <th class="py-4 px-4 font-black">المنطقة</th>
+              <th class="py-4 px-4 font-black">الخدمة</th>
+              <th class="py-4 px-4 font-black">الحالة</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTable">
+            <tr>
+              <td colspan="5" class="py-4 px-4 text-center">جاري التحميل...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
+  <script>
     let currentLang = 'ar';
 
     function toggleLang() {
       currentLang = currentLang === 'ar' ? 'en' : 'ar';
       document.documentElement.lang = currentLang;
       document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-      updateContent();
       init();
     }
 
-    function updateContent() {
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        el.textContent = translations[currentLang][el.getAttribute('data-i18n')];
-      });
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        el.placeholder = translations[currentLang][el.getAttribute('data-i18n-placeholder')];
-      });
-    }
-
     async function init() {
-      const res = await fetch('/api/services');
-      const services = await res.json();
-      const grid = document.getElementById('servicesGrid');
-      const select = document.getElementById('service');
-      
-      grid.innerHTML = services.slice(0, 8).map(s => `
-        <div class="glass p-10 rounded-[2.5rem] card-hover transition-all group cursor-pointer">
-          <div class="text-4xl mb-6">🛠️</div>
-          <h3 class="text-2xl font-black mb-4">${currentLang === 'ar' ? s.name_ar : s.name_en}</h3>
-          <p class="text-slate-400 font-medium">${currentLang === 'ar' ? s.description_ar : s.description_en}</p>
-        </div>
-      `).join('');
+      try {
+        const res = await fetch('/api/services');
+        const services = await res.json();
+        const grid = document.getElementById('servicesGrid');
+        const select = document.getElementById('service');
+        
+        grid.innerHTML = services.map((s, i) => `
+          <div class="glass p-10 rounded-[2.5rem] card-hover transition-all group cursor-pointer">
+            <div class="text-4xl mb-6">${['🔧', '❄️', '💧', '⚡'][i % 4]}</div>
+            <h3 class="text-2xl font-black mb-4">${s.name_ar}</h3>
+            <p class="text-slate-400 font-medium">${s.description_ar}</p>
+          </div>
+        `).join('');
 
-      select.innerHTML = services.map(s => `<option value="${s.id}">${currentLang === 'ar' ? s.name_ar : s.name_en}</option>`).join('');
+        select.innerHTML = services.map(s => `<option value="${s.id}">${s.name_ar}</option>`).join('');
+      } catch (err) {
+        console.error('Error loading services:', err);
+      }
     }
 
     document.getElementById('bookingForm').onsubmit = async (e) => {
@@ -168,18 +161,27 @@
         name: document.getElementById('name').value,
         phone: document.getElementById('phone').value,
         area: document.getElementById('area').value,
-        service: document.getElementById('service').options[document.getElementById('service').selectedIndex].text,
+        service: document.getElementById('service').options[document.getElementById('service').selectedIndex]?.text || 'خدمة عامة',
         date: document.getElementById('date').value,
         time: document.getElementById('time').value
       };
-      const res = await fetch('/api/order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      if (res.ok) {
-        Swal.fire('تم الحجز!', 'سنتواصل معك قريباً', 'success');
-        e.target.reset();
+      
+      try {
+        const res = await fetch('/api/order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        if (res.ok) {
+          await Swal.fire('تم الحجز!', 'سنتواصل معك قريباً على رقم الهاتف المسجل', 'success');
+          e.target.reset();
+        } else {
+          await Swal.fire('خطأ', 'حدث خطأ أثناء إرسال الحجز', 'error');
+        }
+      } catch (err) {
+        console.error('Booking error:', err);
+        await Swal.fire('خطأ', 'فشل الاتصال بالخادم', 'error');
       }
     };
 
