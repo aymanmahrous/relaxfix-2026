@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم | Relax Fix Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root { --gold: #D4AF37; --dark: #0F172A; }
+    body { font-family: 'Tajawal', sans-serif; background-color: #0F172A; color: white; }
+    .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    .sidebar { width: 280px; height: 100vh; position: fixed; right: 0; top: 0; }
+    .main-content { margin-right: 280px; padding: 40px; }
+    .gold-border { border-left: 4px solid var(--gold); }
+  </style>
+</head>
+<body>
+  <div class="sidebar glass p-8">
+    <div class="flex items-center gap-3 mb-12">
+      <div class="w-10 h-10 bg-yellow-600 rounded-lg flex items-center justify-center font-black">R</div>
+      <span class="text-xl font-bold">RELAX FIX <span class="text-yellow-500">PRO</span></span>
+    </div>
+    <nav class="space-y-4">
+      <a href="#" class="block p-4 bg-yellow-600/20 text-yellow-500 rounded-xl font-bold">📊 الإحصائيات</a>
+      <a href="#" class="block p-4 hover:bg-white/5 rounded-xl transition-all">📋 الطلبات الجديدة</a>
+      <a href="#" class="block p-4 hover:bg-white/5 rounded-xl transition-all">📡 رادار الفرص</a>
+      <a href="#" class="block p-4 hover:bg-white/5 rounded-xl transition-all">⚙️ الإعدادات</a>
+    </nav>
+  </div>
+
+  <div class="main-content">
+    <header class="flex justify-between items-center mb-12">
+      <h1 class="text-3xl font-black">مرحباً بك في لوحة التحكم الملكية</h1>
+      <div class="flex items-center gap-4">
+        <span class="p-2 bg-green-500/20 text-green-500 rounded-lg text-sm font-bold">النظام متصل ✅</span>
+        <div class="w-12 h-12 bg-slate-700 rounded-full"></div>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div class="glass p-8 rounded-3xl gold-border">
+        <div class="text-slate-400 font-bold mb-2">إجمالي الطلبات</div>
+        <div class="text-4xl font-black">1,284</div>
+      </div>
+      <div class="glass p-8 rounded-3xl gold-border">
+        <div class="text-slate-400 font-bold mb-2">طلبات اليوم</div>
+        <div class="text-4xl font-black text-yellow-500">24</div>
+      </div>
+      <div class="glass p-8 rounded-3xl gold-border">
+        <div class="text-slate-400 font-bold mb-2">معدل التحويل</div>
+        <div class="text-4xl font-black text-green-500">88%</div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="glass p-8 rounded-3xl">
+        <h3 class="text-xl font-bold mb-6">تحليل الطلبات الأسبوعي</h3>
+        <canvas id="ordersChart"></canvas>
+      </div>
+      <div class="glass p-8 rounded-3xl">
+        <h3 class="text-xl font-bold mb-6">أحدث الطلبات</h3>
+        <div class="space-y-4" id="recentOrders">
+          <div class="p-4 bg-white/5 rounded-2xl flex justify-between items-center">
+            <div>
+              <div class="font-bold">أحمد محمد</div>
+              <div class="text-sm text-slate-400">صيانة تكييف - جزيرة ياس</div>
+            </div>
+            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-500 rounded-lg text-xs font-bold">قيد الانتظار</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('ordersChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
+        datasets: [{
+          label: 'الطلبات',
+          data: [12, 19, 15, 25, 22, 30, 24],
+          borderColor: '#D4AF37',
+          tension: 0.4,
+          fill: true,
+          backgroundColor: 'rgba(212, 175, 55, 0.1)'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } } }
+      }
+    });
+  </script>
+</body>
+</html>
