@@ -3,98 +3,224 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لوحة التحكم | Relax Fix Pro</title>
+  <title>لوحة التحكم - Relaxfix Pro</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    :root { --gold: #D4AF37; --dark: #0F172A; }
     body { font-family: 'Tajawal', sans-serif; background-color: #0F172A; color: white; }
     .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
-    .sidebar { width: 280px; height: 100vh; position: fixed; right: 0; top: 0; }
-    .main-content { margin-right: 280px; padding: 40px; }
-    .gold-border { border-left: 4px solid var(--gold); }
+    .gold-text { color: #D4AF37; }
+    .status-new { background: #3b82f6; }
+    .status-confirmed { background: #10b981; }
+    .status-completed { background: #6366f1; }
   </style>
 </head>
 <body>
-  <div class="sidebar glass p-8">
-    <div class="flex items-center gap-3 mb-12">
-      <div class="w-10 h-10 bg-yellow-600 rounded-lg flex items-center justify-center font-black">R</div>
-      <span class="text-xl font-bold">RELAX FIX <span class="text-yellow-500">PRO</span></span>
-    </div>
-    <nav class="space-y-4">
-      <a href="#" class="block p-4 bg-yellow-600/20 text-yellow-500 rounded-xl font-bold">📊 الإحصائيات</a>
-      <a href="#" class="block p-4 hover:bg-white/5 rounded-xl transition-all">📋 الطلبات الجديدة</a>
-      <a href="#" class="block p-4 hover:bg-white/5 rounded-xl transition-all">📡 رادار الفرص</a>
-      <a href="#" class="block p-4 hover:bg-white/5 rounded-xl transition-all">⚙️ الإعدادات</a>
-    </nav>
-  </div>
+  <div class="min-h-screen p-8">
+    <div class="container mx-auto max-w-7xl">
+      <!-- Header -->
+      <div class="mb-10">
+        <h1 class="text-5xl font-black gold-text mb-2">لوحة التحكم</h1>
+        <p class="text-slate-400 text-lg">إدارة جميع الطلبات الواردة والعاملين</p>
+      </div>
 
-  <div class="main-content">
-    <header class="flex justify-between items-center mb-12">
-      <h1 class="text-3xl font-black">مرحباً بك في لوحة التحكم الملكية</h1>
-      <div class="flex items-center gap-4">
-        <span class="p-2 bg-green-500/20 text-green-500 rounded-lg text-sm font-bold">النظام متصل ✅</span>
-        <div class="w-12 h-12 bg-slate-700 rounded-full"></div>
+      <!-- Stats -->
+      <div class="grid md:grid-cols-4 gap-6 mb-10">
+        <div class="glass p-6 rounded-2xl">
+          <div class="text-4xl mb-2">📊</div>
+          <p class="text-slate-400 mb-2">إجمالي الطلبات</p>
+          <p class="text-3xl font-black gold-text" id="totalOrders">0</p>
+        </div>
+        <div class="glass p-6 rounded-2xl">
+          <div class="text-4xl mb-2">🆕</div>
+          <p class="text-slate-400 mb-2">طلبات جديدة</p>
+          <p class="text-3xl font-black text-blue-500" id="newOrders">0</p>
+        </div>
+        <div class="glass p-6 rounded-2xl">
+          <div class="text-4xl mb-2">✅</div>
+          <p class="text-slate-400 mb-2">مؤكدة</p>
+          <p class="text-3xl font-black text-green-500" id="confirmedOrders">0</p>
+        </div>
+        <div class="glass p-6 rounded-2xl">
+          <div class="text-4xl mb-2">🏁</div>
+          <p class="text-slate-400 mb-2">مكتملة</p>
+          <p class="text-3xl font-black text-indigo-500" id="completedOrders">0</p>
+        </div>
       </div>
-    </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-      <div class="glass p-8 rounded-3xl gold-border">
-        <div class="text-slate-400 font-bold mb-2">إجمالي الطلبات</div>
-        <div class="text-4xl font-black">1,284</div>
+      <!-- Filters & Search -->
+      <div class="glass p-6 rounded-2xl mb-10">
+        <div class="grid md:grid-cols-3 gap-4">
+          <input type="text" id="searchInput" placeholder="بحث عن طلب..." class="p-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500">
+          <select id="filterStatus" class="p-3 bg-slate-800 border border-slate-700 rounded-lg text-white">
+            <option value="">كل الحالات</option>
+            <option value="new">جديد</option>
+            <option value="confirmed">مؤكد</option>
+            <option value="completed">مكتمل</option>
+          </select>
+          <button onclick="loadOrders()" class="bg-gradient-to-r from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-yellow-800 px-6 py-3 rounded-lg font-black transition-all">
+            🔄 تحديث
+          </button>
+        </div>
       </div>
-      <div class="glass p-8 rounded-3xl gold-border">
-        <div class="text-slate-400 font-bold mb-2">طلبات اليوم</div>
-        <div class="text-4xl font-black text-yellow-500">24</div>
-      </div>
-      <div class="glass p-8 rounded-3xl gold-border">
-        <div class="text-slate-400 font-bold mb-2">معدل التحويل</div>
-        <div class="text-4xl font-black text-green-500">88%</div>
-      </div>
-    </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div class="glass p-8 rounded-3xl">
-        <h3 class="text-xl font-bold mb-6">تحليل الطلبات الأسبوعي</h3>
-        <canvas id="ordersChart"></canvas>
-      </div>
-      <div class="glass p-8 rounded-3xl">
-        <h3 class="text-xl font-bold mb-6">أحدث الطلبات</h3>
-        <div class="space-y-4" id="recentOrders">
-          <div class="p-4 bg-white/5 rounded-2xl flex justify-between items-center">
-            <div>
-              <div class="font-bold">أحمد محمد</div>
-              <div class="text-sm text-slate-400">صيانة تكييف - جزيرة ياس</div>
-            </div>
-            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-500 rounded-lg text-xs font-bold">قيد الانتظار</span>
-          </div>
+      <!-- Orders Table -->
+      <div class="glass rounded-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-right">
+            <thead class="bg-slate-800/50 border-b border-slate-700">
+              <tr>
+                <th class="py-4 px-6 font-black">الاسم</th>
+                <th class="py-4 px-6 font-black">الهاتف</th>
+                <th class="py-4 px-6 font-black">المنطقة</th>
+                <th class="py-4 px-6 font-black">الخدمة</th>
+                <th class="py-4 px-6 font-black">الحالة</th>
+                <th class="py-4 px-6 font-black">التاريخ</th>
+                <th class="py-4 px-6 font-black">الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTable">
+              <tr>
+                <td colspan="7" class="py-8 px-6 text-center text-slate-400">جاري تحميل الطلبات...</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Status Modal -->
+  <div id="statusModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center z-50 p-4">
+    <div class="glass rounded-2xl p-8 max-w-md w-full">
+      <h3 class="text-2xl font-black gold-text mb-6">تغيير الحالة</h3>
+      <select id="newStatus" class="w-full p-3 bg-slate-800 border border-slate-700 rounded-lg text-white mb-6">
+        <option value="new">جديد</option>
+        <option value="confirmed">مؤكد</option>
+        <option value="completed">مكتمل</option>
+      </select>
+      <div class="flex gap-4">
+        <button onclick="saveStatus()" class="flex-1 bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg font-black transition-all">حفظ</button>
+        <button onclick="closeModal()" class="flex-1 bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg font-black transition-all">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const ctx = document.getElementById('ordersChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
-        datasets: [{
-          label: 'الطلبات',
-          data: [12, 19, 15, 25, 22, 30, 24],
-          borderColor: '#D4AF37',
-          tension: 0.4,
-          fill: true,
-          backgroundColor: 'rgba(212, 175, 55, 0.1)'
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } } }
+    let allOrders = [];
+    let selectedOrderId = null;
+
+    async function loadOrders() {
+      try {
+        const res = await fetch('/api/admin/orders');
+        allOrders = await res.json();
+        renderOrders();
+        updateStats();
+      } catch (err) {
+        console.error('Error loading orders:', err);
+        alert('خطأ في تحميل الطلبات');
       }
-    });
+    }
+
+    function renderOrders() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const statusFilter = document.getElementById('filterStatus').value;
+      
+      const filtered = allOrders.filter(order => {
+        const matchSearch = !searchTerm || 
+          order.name.toLowerCase().includes(searchTerm) || 
+          order.phone.includes(searchTerm);
+        const matchStatus = !statusFilter || order.status === statusFilter;
+        return matchSearch && matchStatus;
+      });
+
+      const table = document.getElementById('ordersTable');
+      if (filtered.length === 0) {
+        table.innerHTML = '<tr><td colspan="7" class="py-8 px-6 text-center text-slate-400">لا توجد طلبات</td></tr>';
+        return;
+      }
+
+      table.innerHTML = filtered.map(order => `
+        <tr class="border-b border-slate-700/50 hover:bg-slate-800/50 transition-all">
+          <td class="py-4 px-6">${order.name}</td>
+          <td class="py-4 px-6">${order.phone}</td>
+          <td class="py-4 px-6">${order.area}</td>
+          <td class="py-4 px-6 text-sm">${order.service}</td>
+          <td class="py-4 px-6">
+            <span class="status-${order.status} px-4 py-1 rounded-full text-white font-bold text-sm">
+              ${getStatusLabel(order.status)}
+            </span>
+          </td>
+          <td class="py-4 px-6 text-sm">${formatDate(order.created_at)}</td>
+          <td class="py-4 px-6">
+            <button onclick="openStatusModal('${order.id}')" class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded text-black font-black text-sm transition-all">
+              تحديث
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function updateStats() {
+      const total = allOrders.length;
+      const newCount = allOrders.filter(o => o.status === 'new').length;
+      const confirmedCount = allOrders.filter(o => o.status === 'confirmed').length;
+      const completedCount = allOrders.filter(o => o.status === 'completed').length;
+
+      document.getElementById('totalOrders').textContent = total;
+      document.getElementById('newOrders').textContent = newCount;
+      document.getElementById('confirmedOrders').textContent = confirmedCount;
+      document.getElementById('completedOrders').textContent = completedCount;
+    }
+
+    function getStatusLabel(status) {
+      const labels = { new: '🆕 جديد', confirmed: '✅ مؤكد', completed: '🏁 مكتمل' };
+      return labels[status] || status;
+    }
+
+    function formatDate(dateStr) {
+      return new Date(dateStr).toLocaleDateString('ar-AE', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
+
+    function openStatusModal(orderId) {
+      selectedOrderId = orderId;
+      const order = allOrders.find(o => o.id === orderId);
+      if (order) {
+        document.getElementById('newStatus').value = order.status;
+        document.getElementById('statusModal').classList.remove('hidden');
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('statusModal').classList.add('hidden');
+      selectedOrderId = null;
+    }
+
+    async function saveStatus() {
+      const newStatus = document.getElementById('newStatus').value;
+      try {
+        const res = await fetch(`/api/admin/orders/${selectedOrderId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus })
+        });
+        if (res.ok) {
+          closeModal();
+          loadOrders();
+        }
+      } catch (err) {
+        console.error('Error updating order:', err);
+        alert('خطأ في تحديث الحالة');
+      }
+    }
+
+    // Event listeners
+    document.getElementById('searchInput').addEventListener('input', renderOrders);
+    document.getElementById('filterStatus').addEventListener('change', renderOrders);
+
+    // Load orders on page load
+    loadOrders();
+    setInterval(loadOrders, 30000); // Refresh every 30 seconds
   </script>
 </body>
 </html>
