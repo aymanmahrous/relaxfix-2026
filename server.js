@@ -89,6 +89,22 @@ app.get('/api/admin/orders', async (req, res) => {
   }
 });
 
+// Get user orders by phone
+app.get('/api/user/orders', async (req, res) => {
+  const { phone } = req.query;
+  if (!phone) {
+    return res.status(400).json({ error: "Phone number required" });
+  }
+  try {
+    const { data, error } = await supabase.from('orders').select('*').eq('phone', phone).order('created_at', { ascending: false });
+    if (error) throw error;
+    res.status(200).json(data || []);
+  } catch (error) {
+    console.error("Fetch User Orders Error:", error);
+    res.status(500).json({ error: "Failed to fetch user orders" });
+  }
+});
+
 // Update order status (for admin)
 app.patch('/api/admin/orders/:id', async (req, res) => {
   const { id } = req.params;

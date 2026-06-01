@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تقارير الأداء - Relaxfix Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Tajawal', sans-serif; background-color: #0F172A; color: white; }
+    .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    .gold-text { color: #D4AF37; }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen p-8">
+    <div class="container mx-auto max-w-7xl">
+      <!-- Header -->
+      <div class="mb-10">
+        <h1 class="text-5xl font-black gold-text mb-2">تقارير الأداء</h1>
+        <p class="text-slate-400">تحليل الطلبات والإحصائيات الشاملة</p>
+      </div>
+
+      <!-- Period Filter -->
+      <div class="glass p-6 rounded-2xl mb-10">
+        <div class="flex gap-4 flex-wrap">
+          <button onclick="setPeriod('7d')" class="px-6 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-lg font-black transition-all">آخر 7 أيام</button>
+          <button onclick="setPeriod('30d')" class="px-6 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg font-black transition-all">آخر 30 يوم</button>
+          <button onclick="setPeriod('all')" class="px-6 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg font-black transition-all">كل الفترة</button>
+        </div>
+      </div>
+
+      <!-- Charts Grid -->
+      <div class="grid md:grid-cols-2 gap-10 mb-10">
+        <!-- Chart 1: Orders by Status -->
+        <div class="glass p-8 rounded-2xl">
+          <h3 class="text-xl font-black gold-text mb-6">توزيع الطلبات بالحالة</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        
+        <!-- Chart 2: Orders Over Time -->
+        <div class="glass p-8 rounded-2xl">
+          <h3 class="text-xl font-black gold-text mb-6">الطلبات عبر الوقت</h3>
+          <canvas id="timeChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Top Services -->
+      <div class="grid md:grid-cols-2 gap-10">
+        <!-- Services Rankings -->
+        <div class="glass p-8 rounded-2xl">
+          <h3 class="text-xl font-black gold-text mb-6">أفضل الخدمات</h3>
+          <div id="topServices" class="space-y-4">
+            <p class="text-slate-400">جاري التحميل...</p>
+          </div>
+        </div>
+
+        <!-- Statistics Box -->
+        <div class="space-y-4">
+          <div class="glass p-8 rounded-2xl">
+            <p class="text-slate-400 mb-2">متوسط وقت الاستجابة</p>
+            <p class="text-3xl font-black gold-text">2.5 ساعة</p>
+          </div>
+          <div class="glass p-8 rounded-2xl">
+            <p class="text-slate-400 mb-2">معدل الإكمال</p>
+            <p class="text-3xl font-black text-green-500">92%</p>
+          </div>
+          <div class="glass p-8 rounded-2xl">
+            <p class="text-slate-400 mb-2">رضا العملاء</p>
+            <p class="text-3xl font-black text-blue-500">4.8 ⭐</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allOrders = [];
+    let period = '30d';
+    let statusChart = null;
+    let timeChart = null;
+
+    async function loadReports() {
+      try {
+        const res = await fetch('/api/admin/orders');
+        allOrders = await res.json();
+        updateCharts();
+        renderTopServices();
+      } catch (err) {
+        console.error('Error loading reports:', err);
+      }
+    }
+
+    function setPeriod(p) {
+      period = p;
+      updateCharts();
+    }
+
+    function getFilteredOrders() {
+      const now = new Date();
+      const filtered = allOrders.filter(o => {
+        const orderDate = new Date(o.created_at);
+        const daysDiff = (now - orderDate) / (1000 * 60 * 60 * 24);
+        if (period === '7d') return daysDiff <= 7;
+        if (period === '30d') return daysDiff <= 30;
+        return true;
+      });
+      return filtered;
+    }
+
+    function updateCharts() {
+      const filtered = getFilteredOrders();
+      
+      // Status Chart
+      const statusCounts = {
+        new: filtered.filter(o => o.status === 'new').length,
+        confirmed: filtered.filter(o => o.status === 'confirmed').length,
+        completed: filtered.filter(o => o.status === 'completed').length
+      };
+
+      const statusCtx = document.getElementById('statusChart').getContext('2d');
+      if (statusChart) statusChart.destroy();
+      statusChart = new Chart(statusCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['جديد', 'مؤكد', 'مكتمل'],
+          datasets: [{
+            data: [statusCounts.new, statusCounts.confirmed, statusCounts.completed],
+            backgroundColor: ['#3b82f6', '#10b981', '#6366f1']
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: true }
+      });
+
+      // Time Chart
+      const days = 7;
+      const labels = [];
+      const data = [];
+      for (let i = days - 1; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        labels.push(d.toLocaleDateString('ar-AE', { month: 'short', day: 'numeric' }));
+        const count = filtered.filter(o => {
+          const od = new Date(o.created_at);
+          return od.toDateString() === d.toDateString();
+        }).length;
+        data.push(count);
+      }
+
+      const timeCtx = document.getElementById('timeChart').getContext('2d');
+      if (timeChart) timeChart.destroy();
+      timeChart = new Chart(timeCtx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'الطلبات',
+            data: data,
+            borderColor: '#D4AF37',
+            backgroundColor: 'rgba(212, 175, 55, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: true }
+      });
+    }
+
+    function renderTopServices() {
+      const filtered = getFilteredOrders();
+      const serviceCounts = {};
+      filtered.forEach(o => {
+        serviceCounts[o.service] = (serviceCounts[o.service] || 0) + 1;
+      });
+
+      const sorted = Object.entries(serviceCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+
+      const html = sorted.map((s, i) => `
+        <div class="flex justify-between items-center pb-4 border-b border-slate-700/50 last:border-0">
+          <div>
+            <p class="font-bold">${i + 1}. ${s[0]}</p>
+            <p class="text-slate-400 text-sm">${s[1]} طلب</p>
+          </div>
+          <div class="w-24 h-2 bg-slate-700 rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-yellow-500 to-yellow-700" style="width: ${(s[1] / sorted[0][1]) * 100}%"></div>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('topServices').innerHTML = html || '<p class="text-slate-400">لا توجد بيانات</p>';
+    }
+
+    loadReports();
+    setInterval(loadReports, 60000);
+  </script>
+</body>
+</html>
