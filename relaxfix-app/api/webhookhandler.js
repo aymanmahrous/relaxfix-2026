@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import axios from "axios";
 
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 export default async function (req, res) {
     const event = req.body;
@@ -29,6 +29,7 @@ export default async function (req, res) {
         }
         res.status(200).send("Webhook Handled");
     } catch (err) {
+        console.error(err);
         res.status(400).send(`Error: ${err.message}`);
     }
 }
