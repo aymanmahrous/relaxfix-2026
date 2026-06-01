@@ -39,10 +39,22 @@ app.post('/api/order', async (req, res) => {
   const order = req.body || {};
   try {
     // Save to Supabase
-    await supabase.from('orders').insert([{ ...order, status: 'new', created_at: new Date() }]);
+    const { data, error } = await supabase.from('orders').insert([{
+      name: order.name,
+      phone: order.phone,
+      area: order.area,
+      service: order.service,
+      notes: order.notes || '',
+      date: order.date || null,
+      time: order.time || null,
+      status: 'new',
+      created_at: new Date().toISOString()
+    }]);
+
+    if (error) throw error;
 
     // Send to Telegram (best-effort)
-    const message = `🚀 *طلب جديد وصل!*\n👤 *العميل:* ${order.name || ''}\n📞 *الهاتف:* ${order.phone || ''}\n📍 *المنطقة:* ${order.area || ''}\n🛠️ *الخدمة:* ${order.service || ''}`;
+    const message = `🚀 *طلب جديد وصل!*\n👤 *العميل:* ${order.name}\n📞 *الهاتف:* ${order.phone}\n📍 *المنطقة:* ${order.area}\n🛠️ *الخدمة:* ${order.service}\n📅 *التاريخ:* ${order.date || 'لم يحدد'}\n⏰ *الوقت:* ${order.time || 'لم يحدد'}\n\n💬 *الملاحظات:* ${order.notes || 'لا توجد'}`;
 
     if (process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID) {
       try {
@@ -58,10 +70,36 @@ app.post('/api/order', async (req, res) => {
       console.log('Telegram not configured, skipping notify');
     }
 
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, message: 'Order created successfully' });
   } catch (error) {
     console.error("Order Error:", error);
-    res.status(500).json({ error: "Failed" });
+    res.status(500).json({ error: "Failed to create order", details: error.message });
+  }
+});
+
+// Get all orders (for admin)
+app.get('/api/admin/orders', async (req, res) => {
+  try {
+    const { data, error } = await supabase.from('orders').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    res.status(200).json(data || []);
+  } catch (error) {
+    console.error("Fetch Orders Error:", error);
+    res.status(500).json({ error: "Failed to fetch orders" });
+  }
+});
+
+// Update order status (for admin)
+app.patch('/api/admin/orders/:id', async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  try {
+    const { data, error } = await supabase.from('orders').update({ status }).eq('id', id);
+    if (error) throw error;
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    console.error("Update Order Error:", error);
+    res.status(500).json({ error: "Failed to update order" });
   }
 });
 
