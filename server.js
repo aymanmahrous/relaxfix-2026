@@ -1,9 +1,15 @@
-const express = require('express');
-const path = require('path');
-const axios = require('axios');
-const cors = require('cors');
-const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config();
+import express from 'express';
+import path from 'path';
+import axios from 'axios';
+import cors from 'cors';
+import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,18 +36,27 @@ const services = [
 app.get('/api/services', (req, res) => res.json(services));
 
 app.post('/api/order', async (req, res) => {
-  const order = req.body;
+  const order = req.body || {};
   try {
     // Save to Supabase
     await supabase.from('orders').insert([{ ...order, status: 'new', created_at: new Date() }]);
 
-    // Send to Telegram
-    const message = `🚀 *طلب جديد وصل!*\n👤 *العميل:* ${order.name}\n📞 *الهاتف:* ${order.phone}\n📍 *المنطقة:* ${order.area}\n🛠️ *الخدمة:* ${order.service}\n📅 *الموعد:* ${order.date} | ${order.time}`;
-    await axios.post(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
-      chat_id: "-1002263484259",
-      text: message,
-      parse_mode: 'Markdown'
-    });
+    // Send to Telegram (best-effort)
+    const message = `🚀 *طلب جديد وصل!*\n👤 *العميل:* ${order.name || ''}\n📞 *الهاتف:* ${order.phone || ''}\n📍 *المنطقة:* ${order.area || ''}\n🛠️ *الخدمة:* ${order.service || ''}`;
+
+    if (process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID) {
+      try {
+        await axios.post(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          chat_id: process.env.TELEGRAM_CHAT_ID,
+          text: message,
+          parse_mode: 'Markdown'
+        });
+      } catch (tgErr) {
+        console.error('Telegram notify failed:', tgErr.message || tgErr);
+      }
+    } else {
+      console.log('Telegram not configured, skipping notify');
+    }
 
     res.status(200).json({ success: true });
   } catch (error) {
